@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
+<style>
+body {
+overflow: hidden;
+}
+</style>
 <body bgcolor="#0D98BA" onresize="fixCanvas()">
-
+<script src="check.js"></script>
 <canvas id="myCanvas">
 Your browser does not support the canvas element.
 </canvas>
+<h1 id="win"></h1>
 <script>
 function fixCanvas() {
   var canvas = document.getElementById("myCanvas");
@@ -104,6 +110,8 @@ canvas.addEventListener('click', function(evt) {
               state[i] = turn;
               turn = turn*-1;
               drawBoard();
+	      if(checkWin() !="none"){
+	document.getElementById("win").innerHTML =  checkWin()+ " WINS";}
             }
               break;
             }
