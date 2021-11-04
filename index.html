@@ -27,6 +27,9 @@ function fixCanvas() {
   drawBoard()
 }
 function drawBoard() {
+  if (0 != turn) {
+    document.getElementById("win").innerHTML = (1 == turn ? "Black" : "White") + "'s turn.";
+  }
   var canvas = document.getElementById("myCanvas");
   var blocksize = canvas.height/12;
   var sidelength = blocksize/1.7
@@ -111,6 +114,7 @@ canvas.addEventListener('click', function(evt) {
               turn = turn*-1;
               drawBoard();
 	      if(checkWin() !="none"){
+        turn = 0;
 	document.getElementById("win").innerHTML =  checkWin()+ " WINS";}
             }
               break;
