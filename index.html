@@ -12,6 +12,15 @@ Your browser does not support the canvas element.
 </canvas>
 <h1 id="win"></h1>
 <script>
+function undo() {
+  //console.log(move_order);
+  if (move_order.length > 0) {
+    turn *= -1;
+    const i = move_order.pop();
+    state[i] = 0;
+  }
+  drawBoard();
+}
 function fixCanvas() {
   var canvas = document.getElementById("myCanvas");
   if(window.innerHeight >= window.innerWidth){
@@ -98,6 +107,7 @@ var canvas = document.getElementById("myCanvas");
 var hexXVals = [];
 var hexYVals = [];
 var state = [];
+var move_order = [];
 fillState();
 turn = 1;
 var rows = [8,11,12,11,12,11,10,11,12,11,12,11,8];
@@ -111,6 +121,7 @@ canvas.addEventListener('click', function(evt) {
               if(state[i]==0)
               {
               state[i] = turn;
+              move_order.push(i);
               turn = turn*-1;
               drawBoard();
 	      if(checkWin() !="none"){
@@ -121,6 +132,11 @@ canvas.addEventListener('click', function(evt) {
             }
       }
       }, false);
+document.addEventListener('keydown', function(evt) {
+      if (evt.key == 'z') {
+        undo();
+      }
+      });
 </script>
 
 </body>
